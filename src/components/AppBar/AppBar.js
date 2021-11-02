@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { styled, alpha } from '@mui/material/styles';
 import {
   AppBar,
@@ -13,6 +14,7 @@ import {
   Search as SearchIcon,
   AddCircleOutline as AddCircleOutlineIcon,
 } from '@mui/icons-material';
+import weaterOperations from '../../redux/weather/weather-operations';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -56,13 +58,14 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function SearchAppBar() {
+  const dispatch = useDispatch();
   const [city, setCity] = useState('');
   const handleChangeCity = e => setCity(e.currentTarget.value);
 
   const handleSubmit = e => {
     e.preventDefault();
     if (!city) return;
-    console.log(city);
+    dispatch(weaterOperations.fetchCitys(city));
   };
   return (
     <Box sx={{ flexGrow: 1 }}>

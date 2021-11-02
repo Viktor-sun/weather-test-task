@@ -14,7 +14,7 @@ import {
   Search as SearchIcon,
   AddCircleOutline as AddCircleOutlineIcon,
 } from '@mui/icons-material';
-import weaterOperations from '../../redux/weather/weather-operations';
+import weatherOperations from '../../redux/weather/weather-operations';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -65,7 +65,7 @@ export default function SearchAppBar() {
   const handleSubmit = e => {
     e.preventDefault();
     if (!city) return;
-    dispatch(weaterOperations.fetchCitys(city));
+    dispatch(weatherOperations.fetchCitys(city));
   };
   return (
     <Box sx={{ flexGrow: 1 }}>

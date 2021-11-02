@@ -12,5 +12,14 @@ const fetchCitys = city => dispatch => {
     .catch(e => dispatch(weatherActions.citysError(e.message)));
 };
 
+const refreshCity = id => dispatch => {
+  dispatch(weatherActions.refreshCityRequest());
+
+  fetch(`${URL}&id=${id}`)
+    .then(response => response.json())
+    .then(data => dispatch(weatherActions.refreshCitySuccess(data)))
+    .catch(e => dispatch(weatherActions.refreshCityError(e.message)));
+};
+
 // eslint-disable-next-line
-export default { fetchCitys };
+export default { fetchCitys, refreshCity };

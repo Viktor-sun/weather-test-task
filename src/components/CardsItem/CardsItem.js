@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   Card,
   CardContent,
@@ -14,9 +14,21 @@ import {
 } from '@mui/icons-material';
 import IconButton from '@mui/material/IconButton';
 import weatherSelectors from '../../redux/weather/weather-selectors';
+import weatherActions from '../../redux/weather/weather-actions';
+import weatherOperations from '../../redux/weather/weather-operations';
 
 export default function CardsItem() {
+  const dispatch = useDispatch();
   const citys = useSelector(weatherSelectors.getCitys);
+
+  const handleOnRefreshCity = id => () => {
+    console.log(id);
+    dispatch(weatherOperations.refreshCity(id));
+  };
+
+  const handleOnDelCity = id => () => {
+    dispatch(weatherActions.delCity(id));
+  };
 
   return (
     <>
@@ -27,7 +39,7 @@ export default function CardsItem() {
               style={{ position: 'absolute', right: '40px', zIndex: 9 }}
             >
               <IconButton
-                onClick={() => console.log('object')}
+                onClick={handleOnRefreshCity(id)}
                 aria-label="refresh"
                 color="primary"
               >
@@ -36,7 +48,7 @@ export default function CardsItem() {
             </CardActions>
             <CardActions style={{ position: 'absolute', right: 0, zIndex: 9 }}>
               <IconButton
-                onClick={() => console.log('object')}
+                onClick={handleOnDelCity(id)}
                 aria-label="refresh"
                 color="error"
               >

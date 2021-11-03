@@ -20,7 +20,9 @@ const addhCity = city => dispatch => {
     })
     .catch(e => {
       if (e === 404) {
+        dispatch(weatherActions.citysError(e));
         notifications.error('City not found!');
+        return;
       }
       dispatch(weatherActions.citysError(e));
       notifications.error('Something went wrong!');

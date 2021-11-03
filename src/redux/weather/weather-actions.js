@@ -10,6 +10,13 @@ const refreshCityError = createAction('weather/refreshCityError');
 
 const delCity = createAction('weather/delCity');
 
+const addCityId = createAction('weather/addCityId');
+const delCityId = createAction('weather/delCityId');
+
+const getCurrentCityRequest = createAction('weather/getCurrentCityRequest');
+const getCurrentCitySuccess = createAction('weather/getCurrentCitySuccess');
+const getCurrentCityError = createAction('weather/getCurrentCityError');
+
 // eslint-disable-next-line
 export default {
   citysRequest,
@@ -19,4 +26,9 @@ export default {
   refreshCitySuccess,
   refreshCityError,
   delCity,
+  addCityId,
+  delCityId,
+  getCurrentCityRequest,
+  getCurrentCitySuccess,
+  getCurrentCityError,
 };

@@ -16,6 +16,7 @@ const addhCity = city => dispatch => {
     })
     .then(data => {
       dispatch(weatherActions.citysSuccess(data));
+      dispatch(weatherActions.addCityId(data.id));
       notifications.sucess('Sucess');
     })
     .catch(e => {
@@ -49,5 +50,30 @@ const refreshCity = id => dispatch => {
     });
 };
 
+const getCurrentCitys = () => async (dispatch, getState) => {
+  const persistedCitysId = getState().citysWeather.citysId;
+  if (!persistedCitysId) return;
+
+  const arrPromises = persistedCitysId.map(id =>
+    fetch(`${URL}&id=${id}`).then(response => {
+      if (!response.ok) {
+        return Promise.reject(response.status);
+      }
+      return response.json();
+    }),
+  );
+
+  dispatch(weatherActions.getCurrentCityRequest());
+
+  Promise.all(arrPromises)
+    .then(data => {
+      dispatch(weatherActions.getCurrentCitySuccess(data));
+    })
+    .catch(e => {
+      dispatch(weatherActions.getCurrentCityError(e));
+      notifications.error('Something went wrong!');
+    });
+};
+
 // eslint-disable-next-line
-export default { addhCity, refreshCity };
+export default { addhCity, refreshCity, getCurrentCitys };

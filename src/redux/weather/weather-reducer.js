@@ -12,14 +12,27 @@ const citys = createReducer([], {
   },
   [weatherActions.delCity]: (state, { payload }) =>
     state.filter(e => e.id !== payload),
+  [weatherActions.getCurrentCitySuccess]: (_, { payload }) => payload,
+});
+
+const citysId = createReducer([], {
+  [weatherActions.addCityId]: (state, { payload }) => {
+    const newState = [...state];
+    newState.push(payload);
+    return newState;
+  },
+  [weatherActions.delCityId]: (state, { payload }) =>
+    state.filter(e => e !== payload),
 });
 
 const error = createReducer(null, {
   [weatherActions.citysError]: (_, { payload }) => payload,
   [weatherActions.refreshCityError]: (_, { payload }) => payload,
+  [weatherActions.getCurrentCityError]: (_, { payload }) => payload,
 
   [weatherActions.citysSuccess]: () => null,
   [weatherActions.refreshCitySuccess]: () => null,
+  [weatherActions.getCurrentCitySuccess]: () => null,
 });
 
 const loading = createReducer(false, {
@@ -29,10 +42,14 @@ const loading = createReducer(false, {
   [weatherActions.refreshCityRequest]: () => true,
   [weatherActions.refreshCitySuccess]: () => false,
   [weatherActions.refreshCityError]: () => false,
+  [weatherActions.getCurrentCityRequest]: () => true,
+  [weatherActions.getCurrentCitySuccess]: () => false,
+  [weatherActions.getCurrentCityError]: () => false,
 });
 
 export default combineReducers({
   citys,
   error,
   loading,
+  citysId,
 });

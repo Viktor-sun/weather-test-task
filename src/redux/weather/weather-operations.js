@@ -2,7 +2,7 @@ import weatherActions from './weather-actions';
 import notifications from '../../services/react-toastify';
 
 const API_KEY = 'c429d862fd10484dd7fc9a745a47897a';
-const URL = `http://api.openweathermap.org/data/2.5/weather?appid=${API_KEY}&units=metric`;
+const URL = `https://api.openweathermap.org/data/2.5/weather?appid=${API_KEY}&units=metric`;
 
 const addhCity = city => dispatch => {
   dispatch(weatherActions.citysRequest());

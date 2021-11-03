@@ -28,6 +28,7 @@ export default function CardsItem() {
 
   const handleOnDelCity = id => () => {
     dispatch(weatherActions.delCity(id));
+    dispatch(weatherActions.delCityId(id));
   };
 
   return (

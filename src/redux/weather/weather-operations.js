@@ -7,18 +7,28 @@ const fetchCitys = city => dispatch => {
   dispatch(weatherActions.citysRequest());
 
   fetch(`${URL}&q=${city}`)
-    .then(response => response.json())
+    .then(response => {
+      if (!response.ok) {
+        return Promise.reject(response.status);
+      }
+      return response.json();
+    })
     .then(data => dispatch(weatherActions.citysSuccess(data)))
-    .catch(e => dispatch(weatherActions.citysError(e.message)));
+    .catch(e => dispatch(weatherActions.citysError(e)));
 };
 
 const refreshCity = id => dispatch => {
   dispatch(weatherActions.refreshCityRequest());
 
   fetch(`${URL}&id=${id}`)
-    .then(response => response.json())
+    .then(response => {
+      if (!response.ok) {
+        return Promise.reject(response.status);
+      }
+      return response.json();
+    })
     .then(data => dispatch(weatherActions.refreshCitySuccess(data)))
-    .catch(e => dispatch(weatherActions.refreshCityError(e.message)));
+    .catch(e => dispatch(weatherActions.refreshCityError(e)));
 };
 
 // eslint-disable-next-line

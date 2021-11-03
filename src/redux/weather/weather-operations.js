@@ -1,9 +1,10 @@
 import weatherActions from './weather-actions';
+import notifications from '../../services/react-toastify';
 
 const API_KEY = 'c429d862fd10484dd7fc9a745a47897a';
 const URL = `http://api.openweathermap.org/data/2.5/weather?appid=${API_KEY}&units=metric`;
 
-const fetchCitys = city => dispatch => {
+const addhCity = city => dispatch => {
   dispatch(weatherActions.citysRequest());
 
   fetch(`${URL}&q=${city}`)
@@ -13,8 +14,17 @@ const fetchCitys = city => dispatch => {
       }
       return response.json();
     })
-    .then(data => dispatch(weatherActions.citysSuccess(data)))
-    .catch(e => dispatch(weatherActions.citysError(e)));
+    .then(data => {
+      dispatch(weatherActions.citysSuccess(data));
+      notifications.sucess('Sucess');
+    })
+    .catch(e => {
+      if (e === 404) {
+        notifications.error('City not found!');
+      }
+      dispatch(weatherActions.citysError(e));
+      notifications.error('Something went wrong!');
+    });
 };
 
 const refreshCity = id => dispatch => {
@@ -27,9 +37,15 @@ const refreshCity = id => dispatch => {
       }
       return response.json();
     })
-    .then(data => dispatch(weatherActions.refreshCitySuccess(data)))
-    .catch(e => dispatch(weatherActions.refreshCityError(e)));
+    .then(data => {
+      dispatch(weatherActions.refreshCitySuccess(data));
+      notifications.sucess('Sucess');
+    })
+    .catch(e => {
+      dispatch(weatherActions.refreshCityError(e));
+      notifications.error('Something went wrong!');
+    });
 };
 
 // eslint-disable-next-line
-export default { fetchCitys, refreshCity };
+export default { addhCity, refreshCity };

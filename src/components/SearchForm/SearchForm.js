@@ -8,6 +8,7 @@ import {
 } from '@mui/icons-material';
 import weatherOperations from '../../redux/weather/weather-operations';
 import weatherSelectors from '../../redux/weather/weather-selectors';
+import notifications from '../../services/react-toastify';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -62,11 +63,11 @@ export default function SearchForm() {
     if (!city) return;
 
     if (hasCity()) {
-      alert('stop');
+      notifications.error('The city already exists');
       return;
     }
 
-    dispatch(weatherOperations.fetchCitys(city.trim()));
+    dispatch(weatherOperations.addhCity(city.trim()));
     reset();
   };
 

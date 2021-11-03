@@ -22,7 +22,17 @@ const error = createReducer(null, {
   [weatherActions.refreshCitySuccess]: () => null,
 });
 
+const loading = createReducer(false, {
+  [weatherActions.citysRequest]: () => true,
+  [weatherActions.citysSuccess]: () => false,
+  [weatherActions.citysError]: () => false,
+  [weatherActions.refreshCityRequest]: () => true,
+  [weatherActions.refreshCitySuccess]: () => false,
+  [weatherActions.refreshCityError]: () => false,
+});
+
 export default combineReducers({
   citys,
   error,
+  loading,
 });

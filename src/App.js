@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense, useEffect } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import AppBar from './components/AppBar';
@@ -21,7 +21,9 @@ const WeatherDetailsPage = lazy(() =>
 export default function App() {
   const dispatch = useDispatch();
 
-  dispatch(weatherOperations.getCurrentCitys());
+  useEffect(() => {
+    dispatch(weatherOperations.getCurrentCitys());
+  }, [dispatch]);
 
   return (
     <>

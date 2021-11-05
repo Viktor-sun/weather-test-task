@@ -1,0 +1,10 @@
+.charWrapper {
+  max-width: 550px;
+  width: 100%;
+}
+
+@media screen and (max-width: 900px) {
+  .charWrapper {
+    margin: 20px auto 0;
+  }
+}

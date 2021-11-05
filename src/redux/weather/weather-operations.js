@@ -75,5 +75,26 @@ const getCurrentCitys = () => async (dispatch, getState) => {
     });
 };
 
+const fetchHourlyForecast = id => dispatch => {
+  dispatch(weatherActions.hourlyForecastRequest());
+
+  fetch(
+    `https://api.openweathermap.org/data/2.5/forecast?id=${id}&appid=${API_KEY}&units=metric`,
+  )
+    .then(response => {
+      if (!response.ok) {
+        return Promise.reject(response.status);
+      }
+      return response.json();
+    })
+    .then(data => {
+      dispatch(weatherActions.hourlyForecastSuccess(data));
+    })
+    .catch(e => {
+      dispatch(weatherActions.hourlyForecastError(e));
+      notifications.error('Something went wrong!');
+    });
+};
+
 // eslint-disable-next-line
-export default { addhCity, refreshCity, getCurrentCitys };
+export default { addhCity, refreshCity, getCurrentCitys, fetchHourlyForecast };

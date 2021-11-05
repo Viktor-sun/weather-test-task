@@ -47,9 +47,19 @@ const loading = createReducer(false, {
   [weatherActions.getCurrentCityError]: () => false,
 });
 
+const forecast = createReducer([], {
+  [weatherActions.hourlyForecastSuccess]: (_, { payload }) => {
+    const res = payload.list
+      .map(({ main, dt_txt }) => ({ temp: main.temp, dt_txt }))
+      .slice(15);
+    return res;
+  },
+});
+
 export default combineReducers({
   citys,
   error,
   loading,
   citysId,
+  forecast,
 });

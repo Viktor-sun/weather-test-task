@@ -17,6 +17,10 @@ const getCurrentCityRequest = createAction('weather/getCurrentCityRequest');
 const getCurrentCitySuccess = createAction('weather/getCurrentCitySuccess');
 const getCurrentCityError = createAction('weather/getCurrentCityError');
 
+const hourlyForecastRequest = createAction('weather/hourlyForecastRequest');
+const hourlyForecastSuccess = createAction('weather/hourlyForecastSuccess');
+const hourlyForecastError = createAction('weather/hourlyForecastError');
+
 // eslint-disable-next-line
 export default {
   citysRequest,
@@ -31,4 +35,7 @@ export default {
   getCurrentCityRequest,
   getCurrentCitySuccess,
   getCurrentCityError,
+  hourlyForecastRequest,
+  hourlyForecastSuccess,
+  hourlyForecastError,
 };

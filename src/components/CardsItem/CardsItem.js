@@ -64,7 +64,7 @@ export default function CardsItem() {
                 sx={{ width: 130 }}
                 height="100"
                 image={`https://openweathermap.org/img/w/${weather[0].icon}.png`}
-                alt="green iguana"
+                alt="icon weather"
               />
               <CardContent>
                 <Typography gutterBottom variant="h3" component="p">

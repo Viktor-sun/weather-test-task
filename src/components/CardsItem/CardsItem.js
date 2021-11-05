@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Link, useLocation } from 'react-router-dom';
 import {
   Card,
   CardContent,
@@ -20,9 +21,9 @@ import weatherOperations from '../../redux/weather/weather-operations';
 export default function CardsItem() {
   const dispatch = useDispatch();
   const citys = useSelector(weatherSelectors.getCitys);
+  const { pathname } = useLocation();
 
   const handleOnRefreshCity = id => () => {
-    console.log(id);
     dispatch(weatherOperations.refreshCity(id));
   };
 
@@ -57,7 +58,7 @@ export default function CardsItem() {
               </IconButton>
             </CardActions>
 
-            <CardActionArea>
+            <CardActionArea component={Link} to={`${pathname}/${id}`}>
               <CardMedia
                 component="img"
                 sx={{ width: 130 }}

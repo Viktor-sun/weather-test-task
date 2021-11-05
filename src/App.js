@@ -1,22 +1,44 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import AppBar from './components/AppBar';
-import CardsContainer from './components/CardsContainer';
 import Spinner from './components/Spinner';
 import weatherOperations from './redux/weather/weather-operations';
+import routes from './routes';
 
-function App() {
+const WeatherPage = lazy(() =>
+  import(
+    './pages/WeaterPage/WeaterPage.js' /* webpackChunkName: "weather-page" */
+  ),
+);
+
+const WeatherDetailsPage = lazy(() =>
+  import(
+    './pages/WeatherDetailsPage/WeatherDetailsPage.js' /* webpackChunkName: "weather-details-page" */
+  ),
+);
+
+export default function App() {
   const dispatch = useDispatch();
 
   dispatch(weatherOperations.getCurrentCitys());
 
   return (
-    <div className="App">
+    <>
       <AppBar />
-      <CardsContainer />
       <Spinner />
-    </div>
+
+      <Suspense fallback={<Spinner />}>
+        <Switch>
+          <Route exact path={routes.weather}>
+            <WeatherPage />
+          </Route>
+          <Route exact path={routes.weatherDetails}>
+            <WeatherDetailsPage />
+          </Route>
+          <Redirect to={routes.weather} />
+        </Switch>
+      </Suspense>
+    </>
   );
 }
-
-export default App;

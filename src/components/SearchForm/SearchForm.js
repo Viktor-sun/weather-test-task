@@ -2,10 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { styled, alpha } from '@mui/material/styles';
 import { InputBase, IconButton } from '@mui/material';
-import {
-  Search as SearchIcon,
-  AddCircleOutline as AddCircleOutlineIcon,
-} from '@mui/icons-material';
+import { Search as SearchIcon } from '@mui/icons-material';
 import weatherOperations from '../../redux/weather/weather-operations';
 import weatherSelectors from '../../redux/weather/weather-selectors';
 import notifications from '../../services/react-toastify';
@@ -23,16 +20,6 @@ const Search = styled('div')(({ theme }) => ({
     marginLeft: theme.spacing(1),
     width: 'auto',
   },
-}));
-
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
@@ -78,9 +65,6 @@ export default function SearchForm() {
   return (
     <Search>
       <form onSubmit={handleSubmit}>
-        <SearchIconWrapper>
-          <SearchIcon />
-        </SearchIconWrapper>
         <StyledInputBase
           onChange={handleChangeCity}
           value={city}
@@ -92,7 +76,7 @@ export default function SearchForm() {
           color="inherit"
           aria-label="add to shopping cart"
         >
-          <AddCircleOutlineIcon />
+          <SearchIcon />
         </IconButton>
       </form>
     </Search>

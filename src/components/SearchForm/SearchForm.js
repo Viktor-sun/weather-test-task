@@ -38,6 +38,12 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+const StyledButton = styled(IconButton)(() => ({
+  position: 'absolute',
+  top: 0,
+  right: '-3px',
+}));
+
 export default function SearchForm() {
   const dispatch = useDispatch();
   const citys = useSelector(weatherSelectors.getCitys);
@@ -71,13 +77,9 @@ export default function SearchForm() {
           placeholder="Add city..."
           inputProps={{ 'aria-label': 'search' }}
         />
-        <IconButton
-          type="submit"
-          color="inherit"
-          aria-label="add to shopping cart"
-        >
+        <StyledButton type="submit" color="inherit" aria-label="add city">
           <SearchIcon />
-        </IconButton>
+        </StyledButton>
       </form>
     </Search>
   );
